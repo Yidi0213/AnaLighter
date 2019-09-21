@@ -204,9 +204,13 @@ function Hilitor(id, tag) {
 //     characterDataOldValue: true
 // });
 
-document.onmousedown = function() {
+var h = new Hilitor();
+
+document.onmouseup = function() {
+    setTimeout(function(){}, 300);
     setTimeout(function() {
-        text = document.body.innerText;
+        h.remove();
+        var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
         generateKeyPhrase(text);
     }, 1000);
 };
@@ -214,6 +218,7 @@ document.onmousedown = function() {
 
 
 function generateKeyPhrase(s) {
+    s = s.slice(0,5120);
     var find = '"';
     var re = new RegExp(find, 'g');
     s = s.replace(re, "\\\"");
@@ -235,17 +240,18 @@ function generateKeyPhrase(s) {
     xhr.onreadystatechange = function() {
         var response = xhr.responseText;
         if (response != "") {
-            var result = JSON.parse(response).documents[0].keyPhrases;
+            if (JSON.parse(response).documents != undefined) {
+                var result = JSON.parse(response).documents[0].keyPhrases;
+                console.log(result[0]);
+                h.apply(result[0]);
 
-            var h = new Hilitor();
-            h.apply(result[0]);
-
-
-            
+            }
         }
     };
 }
 
-var text = document.body.innerText;
+console.log(document.body.innerText)
+var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
+console.log(text);
 generateKeyPhrase(text);
 

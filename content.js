@@ -187,7 +187,7 @@ function Hilitor(id, tag) {
 var mutationObserver = new MutationObserver(function(mutations) {
     if (mutations !== null) {
         text = document.body.innerText;
-        generateKeyPhrase(text);
+        var result = generateKeyPhrase(text);
 
     }
 });
@@ -207,30 +207,24 @@ function generateKeyPhrase(s) {
         s = s.replace(re, "\\\"");
 
     //Microsoft Azure
-    //let url = "https://gosrgeowgrmep.cognitiveservices.azure.com/text/analytics/v2.1/keyPhrases";
-    //let data = '{"documents": [{"language": "en", "id": "1", "text": "' + s + '"}]}';
-
-    //IBM Watson
-    let url = ""
+    let url = "https://gosrgeowgrmep.cognitiveservices.azure.com/text/analytics/v2.1/keyPhrases";
     let data = '{"documents": [{"language": "en", "id": "1", "text": "' + s + '"}]}';
+
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
 
     //Microsoft Azure
-    //xhr.setRequestHeader('Ocp-Apim-Subscription-Key', '8c8a84402f3440f8a55039d115c54a88');
-    //xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Ocp-Apim-Subscription-Key', '8c8a84402f3440f8a55039d115c54a88');
+    xhr.setRequestHeader('Content-Type', 'application/json');
 
-    //IBM Watson
-    xhr.setRequestHeader();
-    xhr.setRequestHeader();
 
     xhr.send(data);
     xhr.onreadystatechange = function() {
-        console.log(xhr.responseText);
+        return xhr.responseText;
     };
 }
 
 var text = document.body.innerText
 console.log(text);
-generateKeyPhrase(text);
+var result = generateKeyPhrase(text);

@@ -240,12 +240,26 @@ function generateKeyPhrase(s) {
     xhr.onreadystatechange = function() {
         var response = xhr.responseText;
         if (response != "") {
+<<<<<<< HEAD
             if (JSON.parse(response).documents != undefined) {
                 var result = JSON.parse(response).documents[0].keyPhrases;
                 console.log(result[0]);
                 h.apply(result[0]);
 
             }
+=======
+            var result = JSON.parse(response).documents[0].keyPhrases;
+
+            var h = new Hilitor();
+            // h.apply(result[0]);
+
+            h.setBreakRegExp(new RegExp('[^\\w\' -]+', "g")); // expanded to include spaces
+            h.apply(result[0]);
+            // h.apply(result[1]);
+
+
+
+>>>>>>> f78f5402da31aa1eee88f251c2bd94079219794f
         }
     };
 }

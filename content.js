@@ -4,7 +4,7 @@ console.log("Chrome extension is working!");
 var mutationObserver = new MutationObserver(function(mutations) {
     if (mutations !== null) {
         text = document.body.innerText;
-        generateKeyPhrase(text);
+        var result = generateKeyPhrase(text);
 
     }
 });
@@ -44,10 +44,10 @@ function generateKeyPhrase(s) {
 
     xhr.send(data);
     xhr.onreadystatechange = function() {
-        console.log(xhr.responseText);
+        return xhr.responseText;
     };
 }
 
 var text = document.body.innerText
 console.log(text);
-generateKeyPhrase(text);
+var result = generateKeyPhrase(text);

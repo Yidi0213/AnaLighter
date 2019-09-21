@@ -183,7 +183,8 @@ function Hilitor(id, tag) {
     }
 
 }
-
+var myHilitor = new Hilitor(); // id of the element to parse
+// myHilitor.apply("highlight words");
 // Starts listening for changes in the root HTML element of the page.
 var mutationObserver = new MutationObserver(function(mutations) {
     setTimeout(function() {

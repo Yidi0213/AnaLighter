@@ -6,15 +6,15 @@
 //     );
 console.log("Chrome extension is working!");
 
-console.log(document.body.innerText);
-
+// Starts listening for changes in the root HTML element of the page.
 var mutationObserver = new MutationObserver(function(mutations) {
     if (mutations !== null) {
-        console.log(document.body.innerText);
+        text = document.body.innerText;
+        generateKeyPhrase(text);
+
     }
 });
 
-// Starts listening for changes in the root HTML element of the page.
 mutationObserver.observe(document.documentElement, {
     attributes: true,
     characterData: true,
@@ -23,6 +23,27 @@ mutationObserver.observe(document.documentElement, {
     attributeOldValue: true,
     characterDataOldValue: true
 });
+
+function generateKeyPhrase(s) {
+    let url = "https://southcentralus.api.cognitive.microsoft.com/text/analytics/v2.1/keyPhrases";
+
+    let data = '{"documents": [{"language": "en", "id": "1", "text": "' + s + '"}]}';
+    console.log(data);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    xhr.setRequestHeader('Ocp-Apim-Subscription-Key', '8c8a84402f3440f8a55039d115c54a88');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(data);
+    xhr.onreadystatechange = function() {
+        console.log(xhr.responseText);
+    };
+}
+
+var text = document.body.innerText
+console.log(text);
+generateKeyPhrase(text);
+
+
 
 
 // let elts = document.getElementsByTagName('p');

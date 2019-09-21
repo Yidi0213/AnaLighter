@@ -183,13 +183,16 @@ function Hilitor(id, tag) {
     }
 
 }
+
 // Starts listening for changes in the root HTML element of the page.
 var mutationObserver = new MutationObserver(function(mutations) {
-    if (mutations !== null) {
-        text = document.body.innerText;
-        var result = generateKeyPhrase(text);
+    setTimeout(function() {
+        if (mutations !== null) {
+            text = document.body.innerText;
+            var result = generateKeyPhrase(text);
+        }
+    }, 500);
 
-    }
 });
 
 mutationObserver.observe(document.documentElement, {
@@ -221,6 +224,7 @@ function generateKeyPhrase(s) {
 
     xhr.send(data);
     xhr.onreadystatechange = function() {
+        console.log(xhr.responseText);
         return xhr.responseText;
     };
 }

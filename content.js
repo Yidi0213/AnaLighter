@@ -1,3 +1,4 @@
+
 console.log("Chrome extension is working!");
 
 function Hilitor(id, tag) {
@@ -185,29 +186,37 @@ function Hilitor(id, tag) {
 }
 
 // Starts listening for changes in the root HTML element of the page.
-var mutationObserver = new MutationObserver(function(mutations) {
+// var mutationObserver = new MutationObserver(function(mutations) {
+//     setTimeout(function() {
+//         if (mutations !== null) {
+//             text = document.body.innerText;
+//             var result = generateKeyPhrase(text);
+//         }
+//     }, 500);
+// });
+
+// mutationObserver.observe(document.documentElement, {
+//     attributes: true,
+//     characterData: true,
+//     childList: true,
+//     subtree: true,
+//     attributeOldValue: true,
+//     characterDataOldValue: true
+// });
+
+document.onmousedown = function() {
     setTimeout(function() {
-        if (mutations !== null) {
-            text = document.body.innerText;
-            var result = generateKeyPhrase(text);
-        }
-    }, 500);
+        text = document.body.innerText;
+        generateKeyPhrase(text);
+    }, 1000);
+};
 
-});
 
-mutationObserver.observe(document.documentElement, {
-    attributes: true,
-    characterData: true,
-    childList: true,
-    subtree: true,
-    attributeOldValue: true,
-    characterDataOldValue: true
-});
 
 function generateKeyPhrase(s) {
     var find = '"';
     var re = new RegExp(find, 'g');
-        s = s.replace(re, "\\\"");
+    s = s.replace(re, "\\\"");
 
     //Microsoft Azure
     let url = "https://gosrgeowgrmep.cognitiveservices.azure.com/text/analytics/v2.1/keyPhrases";
@@ -225,15 +234,18 @@ function generateKeyPhrase(s) {
     xhr.send(data);
     xhr.onreadystatechange = function() {
         var response = xhr.responseText;
-        if (response == "") {
-            return [];
-        } else {
-            console.log(JSON.parse(response).documents[0].keyPhrases);
-            return JSON.parse(response).documents[0].keyPhrases;
-        }
+        if (response != "") {
+            var result = JSON.parse(response).documents[0].keyPhrases;
 
+            var h = new Hilitor();
+            h.apply(result[0]);
+
+
+            
+        }
     };
 }
 
-var text = document.body.innerText
-var result = generateKeyPhrase(text);
+var text = document.body.innerText;
+generateKeyPhrase(text);
+

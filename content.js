@@ -238,10 +238,14 @@ function generateKeyPhrase(s) {
             var result = JSON.parse(response).documents[0].keyPhrases;
 
             var h = new Hilitor();
+            // h.apply(result[0]);
+
+            h.setBreakRegExp(new RegExp('[^\\w\' -]+', "g")); // expanded to include spaces
             h.apply(result[0]);
+            // h.apply(result[1]);
 
 
-            
+
         }
     };
 }

@@ -224,11 +224,16 @@ function generateKeyPhrase(s) {
 
     xhr.send(data);
     xhr.onreadystatechange = function() {
-        console.log(xhr.responseText);
-        return xhr.responseText;
+        var response = xhr.responseText;
+        if (response == "") {
+            return [];
+        } else {
+            console.log(JSON.parse(response).documents[0].keyPhrases);
+            return JSON.parse(response).documents[0].keyPhrases;
+        }
+
     };
 }
 
 var text = document.body.innerText
-console.log(text);
 var result = generateKeyPhrase(text);

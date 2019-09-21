@@ -1,16 +1,10 @@
-// console.log("It is rainning today");
-
-// $(".alertClick").click(()=>alert('Lol'));
-// $(".alertClick").on('mouseover',
-//     $("p").html(' s')
-//     );
 console.log("Chrome extension is working!");
 
 // Starts listening for changes in the root HTML element of the page.
 var mutationObserver = new MutationObserver(function(mutations) {
     if (mutations !== null) {
         text = document.body.innerText;
-        generateKeyPhrase(text);
+        var result = generateKeyPhrase(text);
 
     }
 });
@@ -44,20 +38,10 @@ function generateKeyPhrase(s) {
 
     xhr.send(data);
     xhr.onreadystatechange = function() {
-        console.log(xhr.responseText);
+        return xhr.responseText;
     };
 }
 
 var text = document.body.innerText
 console.log(text);
-generateKeyPhrase(text);
-
-
-
-
-// let elts = document.getElementsByTagName('p');
-// for(var i = 0; i< elts.length; i++){
-//     elts[i].style['background-color'] = '#F0C';
-// }
-// $(window).load(()=> $("p").css('background-color', '#F0C'));
-// $("p").css('background-color','#F0C');
+var result = generateKeyPhrase(text);

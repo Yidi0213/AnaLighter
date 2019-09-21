@@ -222,7 +222,7 @@ function generateKeyPhrase(s) {
     var find = '"';
     var re = new RegExp(find, 'g');
     s = s.replace(re, "\\\"");
-
+    console.log(s);
     //Microsoft Azure
     let url = "https://gosrgeowgrmep.cognitiveservices.azure.com/text/analytics/v2.1/keyPhrases";
     let data = '{"documents": [{"language": "en", "id": "1", "text": "' + s + '"}]}';
@@ -248,16 +248,12 @@ function generateKeyPhrase(s) {
 
             }
 
-            var result = JSON.parse(response).documents[0].keyPhrases;
-            
-            h.apply(result[0]);
-
         }
     };
 }
 
-console.log(document.body.innerText)
+setTimeout(function() {}, 300);
+
 var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
-console.log(text);
 generateKeyPhrase(text);
 

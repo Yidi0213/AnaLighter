@@ -210,7 +210,6 @@ var h = new Hilitor();
 
 // Detect user interactoin with webpage and re-analyze / analyze user selection
 document.onmouseup = function() {
-    setTimeout(function(){}, 300);
     if (window.getSelection().toString() != "") {
         setTimeout(function() {
             h.remove();
@@ -219,6 +218,7 @@ document.onmouseup = function() {
             window.getSelection().removeAllRanges();
         }, 1000);
     } else {
+        setTimeout(function(){}, 300);
         setTimeout(function() {
             h.remove();
             var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");

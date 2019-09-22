@@ -1,6 +1,6 @@
 # Highlighter
-A chrome extension that intelligently analyzes the webpage and highlights
-key information.
+A chrome extension that utilizes machine learning to analyzes the webpage and highlights
+key information intelligently.
 ## What is Highlighter?
 Highlighter enables web users to select a text paragraph and view key 
 phrases in that paragraph. It utilizes Natural Language Understanding from

@@ -1,9 +1,9 @@
 body{
-    min-width: 500px; /* your desired width */
+    min-width: 300px; /* your desired width */
     max-width: 100%;
     position: relative;
     vertical-align:middle;
-    min-height: 45px; /* your desired width */
+    min-height: 105px; /* your desired width */
     max-height: 100%;
     background: linear-gradient(90deg, rgb(236, 132, 84) 0%, rgb(216, 186, 13) 100%);
 }

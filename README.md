@@ -22,4 +22,4 @@ Up to now, we successfully built the Chrome extension that can extract key phras
 Next, we would love to add more features to AnaLighter. For instance, we plan to add more useful analysis, such as sentiment (positive or negative), emotion (Joy, Anger and more), categories (sports, travel, movies, and more). Some more specific features can be, for instance, quickly detecting urgent emails from users' email inbox. We wrote some spaghetti code, so another goal is to clean our code and make it elegant, concise, and functional, just like what we learned in COMP215.
 
 ## How to Use?
-Download all files in the github into a single local directory. Then open _chrome://extensions/_ in chrome. Make sure developer mode is on, and click _load unpacked_. After that, there should be AnaLighter log in the right up chrome extension lists. Click it and you are ready to use!
+Download all files in the github into a single local directory. Then open _chrome://extensions/_ in chrome. Make sure developer mode is on, click _load unpacked_ and select that directory. After that, there should be AnaLighter log in the right up chrome extension lists. Click it and you are ready to use!

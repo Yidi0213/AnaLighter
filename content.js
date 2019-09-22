@@ -185,6 +185,8 @@ function Hilitor(id, tag) {
 
 }
 
+// Removed functionality of tracking page DOM change and re-analyze as some websites may
+// change their DOMs rapidly as a ui element
 // Starts listening for changes in the root HTML element of the page.
 // var mutationObserver = new MutationObserver(function(mutations) {
 //     setTimeout(function() {
@@ -206,26 +208,27 @@ function Hilitor(id, tag) {
 
 var h = new Hilitor();
 
+// Detect user interactoin with webpage and re-analyze / analyze user selection
 document.onmouseup = function() {
     setTimeout(function(){}, 300);
     if (window.getSelection().toString() != "") {
         setTimeout(function() {
             h.remove();
-            var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
+            var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
             generateKeyPhrase(text);
             window.getSelection().removeAllRanges();
         }, 1000);
     } else {
         setTimeout(function() {
             h.remove();
-            var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
+            var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
             generateKeyPhrase(text);
         }, 1000);
     }
 };
 
 
-
+// Core communication with Azure cloud
 function generateKeyPhrase(s) {
     s = s.slice(0,5120);
     var find = '"';
@@ -251,6 +254,7 @@ function generateKeyPhrase(s) {
         if (response != "") {
 
             if (JSON.parse(response).documents != undefined) {
+                // Parse Azure's response and highlight the contents
                 var result = JSON.parse(response).documents[0].keyPhrases;
                 console.log(result[0]);
                 h.apply(result[0]);
@@ -261,8 +265,8 @@ function generateKeyPhrase(s) {
     };
 }
 
+//Initialize with first time analyzation of page
 setTimeout(function() {}, 300);
-
-var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
+var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
 generateKeyPhrase(text);
 

@@ -17,5 +17,5 @@ highlight key phrases for you. Occurrences of the key phrases in the
 entire text will also be highlighted, showing the relationship between the selected
 paragraph and the entire document.
 ## How we built AnaLighter
-We built AnaLighter in JavaScript and used JSON to build the Chrome extension. For 
-the machine learning part, we utilized Microsoft's Azure API.
+We built AnaLighter in JavaScript and used JSON to build the Chrome extension. 
+For the machine learning part, we utilized Microsoft's Azure API.

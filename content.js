@@ -1045,3 +1045,7 @@ function generateKeyPhrase(s) {
 // var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
 // generateKeyPhrase(text);
 
+// chrome.runtime.sendMessage("hello, World!");
+chrome.runtime.onMessage.addListener((response, sender, sendReponse) => {
+    console.log(response);
+});

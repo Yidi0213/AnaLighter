@@ -208,11 +208,20 @@ var h = new Hilitor();
 
 document.onmouseup = function() {
     setTimeout(function(){}, 300);
-    setTimeout(function() {
-        h.remove();
-        var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
-        generateKeyPhrase(text);
-    }, 1000);
+    if (window.getSelection().toString() != "") {
+        setTimeout(function() {
+            h.remove();
+            var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
+            generateKeyPhrase(text);
+            window.getSelection().removeAllRanges();
+        }, 1000);
+    } else {
+        setTimeout(function() {
+            h.remove();
+            var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,5}\n', 'g'), "");
+            generateKeyPhrase(text);
+        }, 1000);
+    }
 };
 
 

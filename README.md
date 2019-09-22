@@ -6,8 +6,8 @@ AnaLighter enables web users to select a text paragraph and view key
 phrases in that paragraph. It utilizes Natural Language Understanding from
 Microsoft's Azure to analyze text and select key phrases. After the user selects 
 a paragraph, the key phrases from that paragraph as well as their occurrences
-throughout the entire text will be highlighted. For users' information, a popup message
-containing the key phrases will also be displayed on the web page.
+throughout the entire text will be highlighted. Users can turn on AnaLighter by 
+clicking the button whenever they want to.
 
 One of our goals with AnaLighter is to assist web users to process information
 more efficiently. Web users may want to rapidly extract key information from 

@@ -978,23 +978,26 @@ console.log("Chrome extension is working!");
 // });
 
 var h = new Mark(document);
+var running = false;
 
 // Detect user interactoin with webpage and re-analyze / analyze user selection
 document.onmouseup = function() {
-    if (window.getSelection().toString() != "") {
-        setTimeout(function() {
-            h.unmark();
-            var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-            generateKeyPhrase(text);
-            window.getSelection().removeAllRanges();
-        }, 1000);
-    } else {
-        setTimeout(function(){}, 300);
-        setTimeout(function() {
-            h.unmark();
-            var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-            generateKeyPhrase(text);
-        }, 1000);
+    if (running) {
+        if (window.getSelection().toString() != "") {
+            setTimeout(function() {
+                h.unmark();
+                var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+                generateKeyPhrase(text);
+                window.getSelection().removeAllRanges();
+            }, 1000);
+        } else {
+            setTimeout(function(){}, 300);
+            setTimeout(function() {
+                h.unmark();
+                var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+                generateKeyPhrase(text);
+            }, 1000);
+        }
     }
 };
 

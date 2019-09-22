@@ -1051,13 +1051,15 @@ function generateKeyPhrase(s) {
 // chrome.runtime.sendMessage("hello, World!");
 chrome.runtime.onMessage.addListener((response, sender, sendReponse) => {
     console.log(response);
-    if (response.toggle != undefined && response.toggle == 1) {
-        running = true;
-        h.unmark();
-        var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-        generateKeyPhrase(text);
-    } else if (response.toggle != undefined && reponse.toggle == 0) {
-        running = false;
-        h.unmark();
+    if (response.toggle != undefined && response.toggle == "switch") {
+        running = !running;
+        if (running) {
+            h.unmark();
+            var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+            generateKeyPhrase(text);
+        } else {
+            running = false;
+            h.unmark();
+        }
     }
 });

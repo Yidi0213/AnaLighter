@@ -21,3 +21,6 @@ paragraph and the entire document.
 ## How we built AnaLighter
 We built AnaLighter in JavaScript and used JSON to build the Chrome extension. 
 For the machine learning part, we utilized Microsoft's Azure API.
+
+## How to Use?
+Download all files in the github into a single local directory. Then open _chrome://extensions/_ in chrome. Make sure developer mode is on, and click _load unpacked_. After that, there should be AnaLighter log in the right up chrome extension lists. Click it and you are ready to use!

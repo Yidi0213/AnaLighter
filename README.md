@@ -1,2 +1,2 @@
 # Highlighter
-A chrome extension that is able to highlight keyword
+A chrome extension that highlights webpage keyphrases with ML

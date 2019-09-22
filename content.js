@@ -1032,7 +1032,7 @@ function generateKeyPhrase(s) {
                 var result = JSON.parse(response).documents[0].keyPhrases;
                 // console.log(result[0]);
                 console.log(result);
-                h.mark(result.slice(0, 3), {
+                h.mark(result.slice(0, 20), {
                     "accuracy": "exactly",
                     "separateWordSearch": false
                 });

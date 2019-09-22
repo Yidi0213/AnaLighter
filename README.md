@@ -1,5 +1,5 @@
 # AnaLighter
-A chrome extension that utilizes machine learning to analyzes the web page and highlights
+A chrome extension that utilizes machine learning to analyze the web page and highlights
 key information intelligently.
 ## What is AnaLighter?
 AnaLighter enables web users to select a text paragraph and view key 

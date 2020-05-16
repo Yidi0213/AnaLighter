@@ -1013,7 +1013,6 @@ function generateKeyPhrase(s) {
     let url = "https://gosrgeowgrmep.cognitiveservices.azure.com/text/analytics/v2.1/keyPhrases";
     let data = '{"documents": [{"language": "en", "id": "1", "text": "' + s + '"}]}';
 
-
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
 

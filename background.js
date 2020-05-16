@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         
         // Custom Backend
         const s = request.text;
-        let url = encodeURI("http://10.121.179.238:3000/nlu/?text=" + s);
+        let url = encodeURI("http://analighter-backend.herokuapp.com/nlu/?text=" + s);
 
         console.log(url);
 

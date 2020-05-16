@@ -1002,45 +1002,19 @@ document.onmouseup = function() {
 };
 
 
-// Core communication with Azure cloud
+// Core communication with cloud
 function generateKeyPhrase(s) {
     s = s.slice(0,5120);
     var find = '"';
     var re = new RegExp(find, 'g');
     s = s.replace(re, "\\\"");
-    console.log(s);
-    //Microsoft Azure
-    let url = "https://gosrgeowgrmep.cognitiveservices.azure.com/text/analytics/v2.1/keyPhrases";
-    let data = '{"documents": [{"language": "en", "id": "1", "text": "' + s + '"}]}';
+
+    chrome.runtime.sendMessage({
+        type: "relay", 
+        text: s
+    });
 
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url);
-
-    //Microsoft Azure
-    xhr.setRequestHeader('Ocp-Apim-Subscription-Key', '8c8a84402f3440f8a55039d115c54a88');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-
-
-    xhr.send(data);
-    xhr.onreadystatechange = function() {
-        var response = xhr.responseText;
-        if (response != "") {
-
-            if (JSON.parse(response).documents != undefined) {
-                // Parse Azure's response and highlight the contents
-                var result = JSON.parse(response).documents[0].keyPhrases;
-                // console.log(result[0]);
-                console.log(result);
-                h.mark(result.slice(0, 20), {
-                    "accuracy": "exactly",
-                    "separateWordSearch": false
-                });
-
-            }
-
-        }
-    };
 }
 
 //Initialize with first time analyzation of page
@@ -1050,7 +1024,6 @@ function generateKeyPhrase(s) {
 
 // chrome.runtime.sendMessage("hello, World!");
 chrome.runtime.onMessage.addListener((response, sender, sendReponse) => {
-    console.log(response);
     if (response.toggle != undefined && response.toggle == "switch") {
         running = !running;
         if (running) {
@@ -1061,5 +1034,17 @@ chrome.runtime.onMessage.addListener((response, sender, sendReponse) => {
             running = false;
             h.unmark();
         }
+    }
+
+    if (response.type == "relayb") {
+        console.log(response.res);
+        var result = JSON.parse(response.res).keywords;
+        console.log(result);
+        result.forEach((item) => {
+            h.mark(item.text, {
+                "accuracy": "exactly",
+                "separateWordSearch": false
+            });
+        });
     }
 });

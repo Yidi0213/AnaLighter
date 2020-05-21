@@ -981,25 +981,70 @@ var h = new Mark(document);
 var running = false;
 
 // Detect user interactoin with webpage and re-analyze / analyze user selection
-document.onmouseup = function() {
-    if (running) {
-        if (window.getSelection().toString() != "") {
-            setTimeout(function() {
-                h.unmark();
-                var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-                generateKeyPhrase(text);
-                window.getSelection().removeAllRanges();
-            }, 1000);
-        } else {
-            // setTimeout(function(){}, 300);   //not functioning
-            setTimeout(function() {
-                h.unmark();
-                var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-                generateKeyPhrase(text);
-            }, 1000);
+// document.onmouseup = function() {
+
+//     if (running) {
+//         if (window.getSelection().toString() != "") {
+//             setTimeout(function() {
+//                 h.unmark();
+//                 var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+//                 generateKeyPhrase(text);
+//                 window.getSelection().removeAllRanges();
+//             }, 1000);
+//         } else {
+//             // setTimeout(function(){}, 300);   //not functioning
+//             setTimeout(function() {
+//                 h.unmark();
+//                 var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+//                 generateKeyPhrase(text);
+//             }, 1000);
+//         }
+//     }
+// };
+
+// document.onmouseup = (event)=>{
+//     if(event.ctrlKey){
+//         if (running) {
+//             if (window.getSelection().toString() != "") {
+//                 setTimeout(function() {
+//                     h.unmark();
+//                     var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+//                     generateKeyPhrase(text);
+//                     window.getSelection().removeAllRanges();
+//                 }, 1000);
+//             } else {
+//                 // setTimeout(function(){}, 300);   //not functioning
+//                 setTimeout(function() {
+//                     h.unmark();
+//                     var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+//                     generateKeyPhrase(text);
+//                 }, 1000);
+//             }
+//         }
+//     }
+// }
+document.onkeydown = (event)=>{
+    if(event.ctrlKey){
+        if (running) {
+            if (window.getSelection().toString() != "") {
+                setTimeout(function() {
+                    h.unmark();
+                    var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+                    generateKeyPhrase(text);
+                    window.getSelection().removeAllRanges();
+                }, 1000);
+            } else {
+                // setTimeout(function(){}, 300);   //not functioning
+                setTimeout(function() {
+                    h.unmark();
+                    var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+                    generateKeyPhrase(text);
+                }, 1000);
+            }
         }
     }
 };
+
 
 
 // Core communication with cloud
@@ -1030,8 +1075,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
             chrome.runtime.sendMessage({
                 type:"on"
             })
-            // chrome.browserAction.setBadgeText({text: 'ON'});
-            // chrome.browserAction.setBadgeBackgroundColor({color: '#4688F1'});
             h.unmark();
             var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
             generateKeyPhrase(text);

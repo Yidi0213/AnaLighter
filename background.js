@@ -2,6 +2,7 @@
 //     alert(response);
 // });
 
+
 chrome.runtime.onMessage.addListener((msg,sender,sendReponse) =>{
     if (msg.type == "relay") {
         // Microsoft Azure
@@ -49,6 +50,11 @@ chrome.runtime.onMessage.addListener((msg,sender,sendReponse) =>{
         // xhr.open("GET", url);
         // xhr.send();
         // sendResponse();
+    } else if (msg.type == "on"){
+        chrome.browserAction.setBadgeText({text: 'ON',tabId:sender.tab.id});
+        chrome.browserAction.setBadgeBackgroundColor({color: '#4688F1'});
+    } else if (msg.type =="off"){
+        chrome.browserAction.setBadgeText({text: '',tabId:sender.tab.id});
     }
 });
 

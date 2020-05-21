@@ -1027,10 +1027,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.toggle != undefined && msg.toggle == "switch") {
         running = !running;
         if (running) {
+            chrome.runtime.sendMessage({
+                type:"on"
+            })
+            // chrome.browserAction.setBadgeText({text: 'ON'});
+            // chrome.browserAction.setBadgeBackgroundColor({color: '#4688F1'});
             h.unmark();
             var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
             generateKeyPhrase(text);
         } else {
+            chrome.runtime.sendMessage({
+                type:"off"
+            })
             running = false;
             h.unmark();
         }

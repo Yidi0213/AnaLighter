@@ -991,7 +991,7 @@ document.onmouseup = function() {
                 window.getSelection().removeAllRanges();
             }, 1000);
         } else {
-            setTimeout(function(){}, 300);
+            // setTimeout(function(){}, 300);   //not functioning
             setTimeout(function() {
                 h.unmark();
                 var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
@@ -1004,16 +1004,16 @@ document.onmouseup = function() {
 
 // Core communication with cloud
 function generateKeyPhrase(s) {
+    // console.log("get rid of regex");
     s = s.slice(0,5120);
     var find = '"';
     var re = new RegExp(find, 'g');
-    s = s.replace(re, "\\\"");
+    s = s.replace(re, "\\\"");          //????? why we need this?
 
     chrome.runtime.sendMessage({
         type: "relay", 
         text: s
     });
-
 
 }
 
@@ -1023,8 +1023,8 @@ function generateKeyPhrase(s) {
 // generateKeyPhrase(text);
 
 // chrome.runtime.sendMessage("hello, World!");
-chrome.runtime.onMessage.addListener((response, sender, sendReponse) => {
-    if (response.toggle != undefined && response.toggle == "switch") {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    if (msg.toggle != undefined && msg.toggle == "switch") {
         running = !running;
         if (running) {
             h.unmark();
@@ -1036,9 +1036,10 @@ chrome.runtime.onMessage.addListener((response, sender, sendReponse) => {
         }
     }
 
-    if (response.type == "relayb") {
-        console.log(response.res);
-        var result = JSON.parse(response.res).keywords;
+    if (msg.type == "relayb") {
+        // console.log("before: ",msg.res);
+        // var result = JSON.parse(msg.res).keywords;
+        var result = msg.res.keywords;
         console.log(result);
         result.forEach((item) => {
             h.mark(item.text, {

@@ -23,3 +23,5 @@ Next, we would love to add more features to AnaLighter. For instance, we plan to
 
 ## How to Use?
 Download all files in the github into a single local directory. Then open _chrome://extensions/_ in chrome. Make sure developer mode is on, click _load unpacked_ and select that directory. After that, there should be AnaLighter log in the right up chrome extension lists. Click it and you are ready to use!
+
+https://docs.google.com/document/d/1ofGFUc9UJmEhjd5Ttg6L_qhA7VOAwSkbpW_9lNpUCBQ/edit

@@ -981,7 +981,7 @@ document.onkeydown = (event)=>{
 // Core communication with cloud
 function generateKeyPhrase(s) {
     // console.log("get rid of regex");
-    document.body.style.cursor = 'wait';
+    document.body.style.cursor = 'progress';
     s = s.slice(0,5120);
     var find = '"';
     var re = new RegExp(find, 'g');

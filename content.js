@@ -960,7 +960,7 @@ var running = false;
 // Detect user interactoin with webpage and re-analyze / analyze user selection
 
 document.onkeydown = (event)=>{
-    if(event.ctrlKey){
+    if(event.keyCode==16){      //detect shift pressed
         if (running) {
             if (window.getSelection().toString() != "") {   //highlight proceed if not empty
                 h.unmark();
@@ -1033,11 +1033,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
             var result = msg.res.keywords;
             result.forEach((item) => {
                 h.mark(item.text, {
-                    "accuracy": "exactly",
                     "separateWordSearch": false
                 });
             });
             document.body.style.cursor = 'default';
         }
+    }
+
+    if (msg.type=="failure"){
+        alert("The size of the selected text is too big");
+        document.body.style.cursor = 'default';
     }
 });

@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "AnaLighter",
+    "name": "Analytic Highlighter",
     "version": "1.0",
-    "description":"utilize NLP to enhance web browsing experience",
+    "description":"Utilize NLP to analyze user selected paragraph to extract and highlight key words in the webpage.",
     "content_scripts": [
         {
             "matches":[

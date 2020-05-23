@@ -966,20 +966,15 @@ var running = false;
 document.onkeydown = (event)=>{
     if(event.ctrlKey){
         if (running) {
-            if (window.getSelection().toString() != "") {
-                setTimeout(function() {
-                    h.unmark();
-                    var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-                    generateKeyPhrase(text);
-                    window.getSelection().removeAllRanges();
-                }, 1000);
-            } else {
-                // setTimeout(function(){}, 300);   //not functioning
-                setTimeout(function() {
-                    h.unmark();
-                    var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-                    generateKeyPhrase(text);
-                }, 1000);
+            if (window.getSelection().toString() != "") {   //highlight proceed if not empty
+                h.unmark();
+                var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+                generateKeyPhrase(text);
+                window.getSelection().removeAllRanges();
+            } else {    
+                h.unmark();
+                var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
+                generateKeyPhrase(text);
             }
         }
     }
@@ -994,7 +989,7 @@ function generateKeyPhrase(s) {
     s = s.slice(0,5120);
     var find = '"';
     var re = new RegExp(find, 'g');
-    s = s.replace(re, "\\\"");          //????? why we need this?
+    s = s.replace(re, "\\\"");         
 
     chrome.runtime.sendMessage({
         type: "relay", 

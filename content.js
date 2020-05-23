@@ -1050,6 +1050,7 @@ document.onkeydown = (event)=>{
 // Core communication with cloud
 function generateKeyPhrase(s) {
     // console.log("get rid of regex");
+    document.body.style.cursor = 'wait';
     s = s.slice(0,5120);
     var find = '"';
     var re = new RegExp(find, 'g');
@@ -1084,19 +1085,23 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
             })
             running = false;
             h.unmark();
+            document.body.style.cursor = 'default';
         }
     }
 
     if (msg.type == "relayb") {
         // console.log("before: ",msg.res);
         // var result = JSON.parse(msg.res).keywords;
-        var result = msg.res.keywords;
-        console.log(result);
-        result.forEach((item) => {
-            h.mark(item.text, {
-                "accuracy": "exactly",
-                "separateWordSearch": false
+        if (running) {
+            var result = msg.res.keywords;
+            console.log(result);
+            result.forEach((item) => {
+                h.mark(item.text, {
+                    "accuracy": "exactly",
+                    "separateWordSearch": false
+                });
             });
-        });
+            document.body.style.cursor = 'default';
+        }
     }
 });

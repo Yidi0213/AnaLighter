@@ -956,26 +956,6 @@ console.log("Chrome extension is working!");
 
 })));
 
-// Removed functionality of tracking page DOM change and re-analyze as some websites may
-// change their DOMs rapidly as a ui element
-// Starts listening for changes in the root HTML element of the page.
-// var mutationObserver = new MutationObserver(function(mutations) {
-//     setTimeout(function() {
-//         if (mutations !== null) {
-//             text = document.body.innerText;
-//             var result = generateKeyPhrase(text);
-//         }
-//     }, 500);
-// });
-
-// mutationObserver.observe(document.documentElement, {
-//     attributes: true,
-//     characterData: true,
-//     childList: true,
-//     subtree: true,
-//     attributeOldValue: true,
-//     characterDataOldValue: true
-// });
 
 var h = new Mark(document);
 var running = false;
@@ -983,46 +963,6 @@ var running = false;
 // Detect user interactoin with webpage and re-analyze / analyze user selection
 // document.onmouseup = function() {
 
-//     if (running) {
-//         if (window.getSelection().toString() != "") {
-//             setTimeout(function() {
-//                 h.unmark();
-//                 var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-//                 generateKeyPhrase(text);
-//                 window.getSelection().removeAllRanges();
-//             }, 1000);
-//         } else {
-//             // setTimeout(function(){}, 300);   //not functioning
-//             setTimeout(function() {
-//                 h.unmark();
-//                 var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-//                 generateKeyPhrase(text);
-//             }, 1000);
-//         }
-//     }
-// };
-
-// document.onmouseup = (event)=>{
-//     if(event.ctrlKey){
-//         if (running) {
-//             if (window.getSelection().toString() != "") {
-//                 setTimeout(function() {
-//                     h.unmark();
-//                     var text = window.getSelection().toString().replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-//                     generateKeyPhrase(text);
-//                     window.getSelection().removeAllRanges();
-//                 }, 1000);
-//             } else {
-//                 // setTimeout(function(){}, 300);   //not functioning
-//                 setTimeout(function() {
-//                     h.unmark();
-//                     var text = document.body.innerText.replace(new RegExp('\n([^ ]+\s){1,6}\n', 'g'), "");
-//                     generateKeyPhrase(text);
-//                 }, 1000);
-//             }
-//         }
-//     }
-// }
 document.onkeydown = (event)=>{
     if(event.ctrlKey){
         if (running) {

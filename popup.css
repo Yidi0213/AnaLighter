@@ -1,5 +1,5 @@
 body{
-    min-width: 250px; /* your desired width */
+    min-width: 220px; /* your desired width */
     max-width: 100%;
     position: relative;
     vertical-align:middle;
@@ -9,11 +9,10 @@ body{
 }
 
 .logo{
-    height: 40px;
+    height: 35px;
     max-height: 100%;
-    width: 40px;
+    width: 35px;
     max-width: 100%; 
-    /* vertical-align:middle;  */
     position: absolute;
     top: 0;
     bottom: 66px;
@@ -22,6 +21,13 @@ body{
 
 
 .text{
-    size: 2rem;
+    size: 1rem;
     font-size: 1.4rem;
+}
+
+
+.center{
+    position: absolute;
+    left: 64px;
+    bottom:5px;
 }

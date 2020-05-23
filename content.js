@@ -1,6 +1,3 @@
-
-console.log("Chrome extension is working!");
-
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
         typeof define === 'function' && define.amd ? define(factory) :
@@ -1032,11 +1029,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
 
     if (msg.type == "keywords") {
-        // console.log("before: ",msg.res);
-        // var result = JSON.parse(msg.res).keywords;
         if (running) {
             var result = msg.res.keywords;
-            console.log(result);
             result.forEach((item) => {
                 h.mark(item.text, {
                     "accuracy": "exactly",

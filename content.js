@@ -961,7 +961,6 @@ var h = new Mark(document);
 var running = false;
 
 // Detect user interactoin with webpage and re-analyze / analyze user selection
-// document.onmouseup = function() {
 
 document.onkeydown = (event)=>{
     if(event.ctrlKey){

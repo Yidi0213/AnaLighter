@@ -1010,7 +1010,15 @@ function generateKeyPhrase(s) {
 
 // chrome.runtime.sendMessage("hello, World!");
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-    if (msg.toggle != undefined && msg.toggle == "switch") {
+    if (msg.type == undefined) {
+        return;
+    }
+
+    if (msg.type == "startup") {
+        sendResponse({status: running});
+    }
+
+    if (msg.type == "switch") {
         running = !running;
         if (running) {
             chrome.runtime.sendMessage({
@@ -1029,7 +1037,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         }
     }
 
-    if (msg.type == "relayb") {
+    if (msg.type == "keywords") {
         // console.log("before: ",msg.res);
         // var result = JSON.parse(msg.res).keywords;
         if (running) {

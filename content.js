@@ -1085,10 +1085,11 @@ function generateKeyPhrase(s) {
   var re = new RegExp(find, "g");
   s = s.replace(re, '\\"');
 
+  console.log(Math.ceil(s.length / 100));
   chrome.runtime.sendMessage({
     type: "relay",
     text: s,
-    limit: Math.floor(s.length / 100),
+    limit: Math.ceil(s.length / 100),
     emotion: emotion,
     sentiment: sentiment
   });

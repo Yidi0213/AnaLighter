@@ -10,8 +10,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendReponse) => {
       data = {
         limit: 10,
         text: msg.text,
-        emotion: true,
-        sentiment: true,
+        emotion: msg.emotion,
+        sentiment: msg.sentiment,
       };
 
       fetch(url, {

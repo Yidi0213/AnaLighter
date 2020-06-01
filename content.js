@@ -1046,6 +1046,8 @@
 
 var h = new Mark(document);
 var running = false;
+var emotion = true;
+var sentiment = true;
 
 // Detect user interactoin with webpage and re-analyze / analyze user selection
 
@@ -1086,6 +1088,9 @@ function generateKeyPhrase(s) {
   chrome.runtime.sendMessage({
     type: "relay",
     text: s,
+    limit: max(s.length / 50, 20),
+    emotion: emotion,
+    sentiment: sentiment
   });
 }
 
@@ -1096,50 +1101,53 @@ function generateKeyPhrase(s) {
 
 // chrome.runtime.sendMessage("hello, World!");
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type == undefined) {
-    return;
-  }
-
-  if (msg.type == "startup") {
-    sendResponse({ status: running });
-  }
-
-  if (msg.type == "switch") {
-    running = !running;
-    if (running) {
-      chrome.runtime.sendMessage({
-        type: "on",
-      });
-      h.unmark();
-      var text = document.body.innerText.replace(
-        new RegExp("\n([^ ]+s){1,6}\n", "g"),
-        ""
-      );
-      generateKeyPhrase(text);
-    } else {
-      chrome.runtime.sendMessage({
-        type: "off",
-      });
-      running = false;
-      h.unmark();
-      document.body.style.cursor = "default";
-    }
-  }
-
-  if (msg.type == "keywords") {
-    if (running) {
-      var result = msg.res.keywords;
-      result.forEach((item) => {
-        h.mark(item.text, {
-          separateWordSearch: false,
+  switch (msg.type) {
+    case "startup":
+      sendResponse({ status: running, emotion: emotion, sentiment: sentiment });
+      break;
+    case "emotion":
+      emotion = !emotion;
+      break;
+    case "sentiment":
+      sentiment = !sentiment;
+      break;
+    case "switch":
+      running = !running;
+      if (running) {
+        chrome.runtime.sendMessage({
+          type: "on",
         });
-      });
+        h.unmark();
+        var text = document.body.innerText.replace(
+          new RegExp("\n([^ ]+s){1,6}\n", "g"),
+          ""
+        );
+        generateKeyPhrase(text);
+      } else {
+        chrome.runtime.sendMessage({
+          type: "off",
+        });
+        running = false;
+        h.unmark();
+        document.body.style.cursor = "default";
+      }
+      break;
+    case "keywords":
+      if (running) {
+        var result = msg.res.keywords;
+        result.forEach((item) => {
+          h.mark(item.text, {
+            separateWordSearch: false,
+          });
+        });
+        document.body.style.cursor = "default";
+      }
+      break;
+    case "failure":
+      alert("The size of the selected text is too big");
       document.body.style.cursor = "default";
-    }
-  }
-
-  if (msg.type == "failure") {
-    alert("The size of the selected text is too big");
-    document.body.style.cursor = "default";
+      break;
+    default:
+      break;
   }
 });

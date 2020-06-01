@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendReponse) => {
     case "relay":
       // let url = encodeURI("http://analighter-backend.herokuapp.com/nlu/?text=" + msg.text);
       data = {
-        limit: 10,
+        limit: msg.limit,
         text: msg.text,
         emotion: msg.emotion,
         sentiment: msg.sentiment,

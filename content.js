@@ -1080,7 +1080,7 @@ document.onkeydown = (event) => {
 function generateKeyPhrase(s) {
   // console.log("get rid of regex");
   document.body.style.cursor = "progress";
-  s = s.slice(0, 5120);
+  // s = s.slice(0, 5120);
   var find = '"';
   var re = new RegExp(find, "g");
   s = s.replace(re, '\\"');
@@ -1088,7 +1088,7 @@ function generateKeyPhrase(s) {
   chrome.runtime.sendMessage({
     type: "relay",
     text: s,
-    limit: max(s.length / 50, 20),
+    limit: Math.floor(s.length / 100),
     emotion: emotion,
     sentiment: sentiment
   });

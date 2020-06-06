@@ -11,7 +11,7 @@
             "js":["content.js"]
         }
     ],
-    "permissions":["tabs"],
+    "permissions":[],
     "background" : {
         "scripts":["background.js"]
     },

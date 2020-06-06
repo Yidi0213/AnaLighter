@@ -10,12 +10,8 @@ window.onload = function() {
             emotion = res.emotion;
             sentiment = res.sentiment;
             document.getElementById("button").innerText = buttonText[displayId];
-            // document.getElementById("emotion").style.visibility = "visible";
-            // document.getElementById("sentiment").style.visibility = "visible";
             document.getElementById("emotion").style.backgroundColor = emotion ? "blue" : "gray";
             document.getElementById("sentiment").style.backgroundColor = sentiment ? "blue" : "gray";
-            // document.getElementById("emotion").style.visibility = "visible";
-            // document.getElementById("sentiment").style.visibility = "visible";
             document.getElementById("emotion").style.display = "block";
             document.getElementById("sentiment").style.display = "block";
 

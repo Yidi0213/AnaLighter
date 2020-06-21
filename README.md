@@ -1,3 +1,5 @@
+![alt text](src/logo128.png)
+
 ## Inspiration
 Have you ever run into a long document and had no idea where to start reading? Have you had a hard time extracting key information from a research paper? Have you ever had trouble looking for answers to your questions on a web page? Maybe you want something magical that can extract key information for you? We are making one for you! With the help of robust AI service provided by IBM Watson, we built our Analytic Highlighter, an intelligent Chrome extension, to make your dream come true. Serving as your personal "secretary", it highlights key phrases to enhance your web browsing experience and save your invaluable time to focus on important things that you care. 
 

@@ -2,6 +2,8 @@ buttonText = ['Turn On', 'Turn Off'];
 displayId = 0;
 emotion = true;
 sentiment = true;
+btnOnColor = 'green';
+btnOffColor = 'grey';
 
 window.onload = function() {
     chrome.tabs.query({active:true,currentWindow:true},(tabs)=>{
@@ -10,11 +12,10 @@ window.onload = function() {
             emotion = res.emotion;
             sentiment = res.sentiment;
             document.getElementById("button").innerText = buttonText[displayId];
-            document.getElementById("emotion").style.backgroundColor = emotion ? "blue" : "gray";
-            document.getElementById("sentiment").style.backgroundColor = sentiment ? "blue" : "gray";
+            document.getElementById("emotion").style.backgroundColor = emotion ? btnOnColor : btnOffColor;
+            document.getElementById("sentiment").style.backgroundColor = sentiment ? btnOnColor : btnOffColor;
             document.getElementById("emotion").style.display = "block";
             document.getElementById("sentiment").style.display = "block";
-
         });
     })
 }
@@ -32,7 +33,7 @@ document.getElementById("emotion").onclick = function() {
     chrome.tabs.query({active:true,currentWindow:true},(tabs)=>{
         chrome.tabs.sendMessage(tabs[0].id,{type:"emotion"});
     });
-    document.getElementById("emotion").style.backgroundColor = emotion ? "blue" : "gray";
+    document.getElementById("emotion").style.backgroundColor = emotion ? btnOnColor : btnOffColor;
 }
 
 document.getElementById("sentiment").onclick = function() {
@@ -40,5 +41,5 @@ document.getElementById("sentiment").onclick = function() {
     chrome.tabs.query({active:true,currentWindow:true},(tabs)=>{
         chrome.tabs.sendMessage(tabs[0].id,{type:"sentiment"});
     });
-    document.getElementById("sentiment").style.backgroundColor = sentiment ? "blue" : "gray";
+    document.getElementById("sentiment").style.backgroundColor = sentiment ? btnOnColor : btnOffColor;
 }

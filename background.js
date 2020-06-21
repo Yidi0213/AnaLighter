@@ -1,12 +1,8 @@
-// chrome.runtime.onMessage.addListener((response, sender, sendReponse) => {
-//     alert(response);
-// });
 const url = "https://analighter-backend.herokuapp.com/nlu/";
 
 chrome.runtime.onMessage.addListener((msg, sender, sendReponse) => {
   switch (msg.type) {
     case "relay":
-      // let url = encodeURI("http://analighter-backend.herokuapp.com/nlu/?text=" + msg.text);
       data = {
         limit: msg.limit,
         text: msg.text,

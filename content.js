@@ -1128,12 +1128,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       break;
     case "sentiment":
       sentiment = !sentiment;
-      h.unmark();
-      var text = document.body.innerText.replace(
-        new RegExp("\n([^ ]+s){1,6}\n", "g"),
-        ""
-      );
-      generateKeyPhrase(text);
+      if (running) {
+        h.unmark();
+        var text = document.body.innerText.replace(
+          new RegExp("\n([^ ]+s){1,6}\n", "g"),
+          ""
+        );
+        generateKeyPhrase(text);
+      }
       break;
     case "switch":
       running = !running;

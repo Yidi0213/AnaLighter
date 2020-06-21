@@ -1,3 +1,5 @@
+color = "blue";
+
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined"
     ? (module.exports = factory())
@@ -718,6 +720,7 @@
         ret = startNode.splitText(end - start);
       let repl = document.createElement(hEl);
       repl.setAttribute("data-markjs", "true");
+      repl.setAttribute("style", "background-color:" + color);
       if (this.opt.className) {
         repl.setAttribute("class", this.opt.className);
       }
@@ -1137,6 +1140,17 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       if (running) {
         var result = msg.res.keywords;
         result.forEach((item) => {
+          console.log(item);
+          switch (item.sentiment.label) {
+            case "positive":
+              color = "green";
+              break;
+            case "negative":
+              colro = "red";
+              break;
+            default:
+              color = "yellow";
+          }
           h.mark(item.text, {
             separateWordSearch: false,
           });

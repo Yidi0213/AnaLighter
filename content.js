@@ -1049,7 +1049,6 @@ color = "yellow";
 
 var h = new Mark(document);
 var running = false;
-var emotion = true;
 var sentiment = true;
 
 // Detect user interactoin with webpage and re-analyze / analyze user selection
@@ -1112,7 +1111,6 @@ function generateKeyPhrase(s) {
     type: "relay",
     text: s,
     limit: Math.ceil(s.length / 100),
-    emotion: emotion,
     sentiment: sentiment
   });
 }
@@ -1126,10 +1124,7 @@ function generateKeyPhrase(s) {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.type) {
     case "startup":
-      sendResponse({ status: running, emotion: emotion, sentiment: sentiment });
-      break;
-    case "emotion":
-      emotion = !emotion;
+      sendResponse({ status: running, sentiment: sentiment });
       break;
     case "sentiment":
       sentiment = !sentiment;

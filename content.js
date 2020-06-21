@@ -1099,14 +1099,12 @@ document.onkeydown = (event) => {
 
 // Core communication with cloud
 function generateKeyPhrase(s) {
-  // console.log("get rid of regex");
   document.body.style.cursor = "progress";
   // s = s.slice(0, 5120);
   var find = '"';
   var re = new RegExp(find, "g");
   s = s.replace(re, '\\"');
 
-  console.log(Math.ceil(s.length / 100));
   chrome.runtime.sendMessage({
     type: "relay",
     text: s,
@@ -1162,7 +1160,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       if (running) {
         var result = msg.res.keywords;
         result.forEach((item) => {
-          console.log(item);
           if (sentiment) {
             color = sentimentColor(item.sentiment);
           } else {

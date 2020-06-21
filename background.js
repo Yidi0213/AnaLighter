@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendReponse) => {
           });
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           chrome.tabs.query({ active: true, currentWindow: true }, function (
             tabs
           ) {

@@ -1054,6 +1054,25 @@ var sentiment = true;
 
 // Detect user interactoin with webpage and re-analyze / analyze user selection
 
+function sentimentColor(req){
+  r = 0;
+  g = 0;
+  b = 0;
+  label = req['label'];
+  score = Math.abs(req['score']);
+  alpha = 0.4 + 0.5*score
+  if (label == 'negative'){
+    r = 255;
+  } else if (label == 'neutral'){
+    r = 255;
+    g = 255;
+    alpha = 0.8;
+  } else {
+    g = 255;
+  }
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
 document.onkeydown = (event) => {
   if (event.keyCode == 16) {
     //detect shift pressed
@@ -1141,16 +1160,17 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         var result = msg.res.keywords;
         result.forEach((item) => {
           console.log(item);
-          switch (item.sentiment.label) {
-            case "positive":
-              color = "green";
-              break;
-            case "negative":
-              colro = "red";
-              break;
-            default:
-              color = "yellow";
-          }
+          color = sentimentColor(item.sentiment);
+          // switch (item.sentiment.label) {
+          //   case "positive":
+          //     color = "green";
+          //     break;
+          //   case "negative":
+          //     color = "red";
+          //     break;
+          //   default:
+          //     color = "yellow";
+          // }
           h.mark(item.text, {
             separateWordSearch: false,
           });

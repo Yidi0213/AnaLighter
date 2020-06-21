@@ -12,7 +12,7 @@
             "js":["content.js"]
         }
     ],
-    "permissions":[],
+    "permissions":["activeTab"],
     "background" : {
         "scripts":["background.js"]
     },

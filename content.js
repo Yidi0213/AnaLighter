@@ -1,4 +1,4 @@
-color = "blue";
+color = "yellow";
 
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined"
@@ -1133,6 +1133,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       break;
     case "sentiment":
       sentiment = !sentiment;
+      h.unmark();
+      var text = document.body.innerText.replace(
+        new RegExp("\n([^ ]+s){1,6}\n", "g"),
+        ""
+      );
+      generateKeyPhrase(text);
       break;
     case "switch":
       running = !running;
@@ -1160,17 +1166,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         var result = msg.res.keywords;
         result.forEach((item) => {
           console.log(item);
-          color = sentimentColor(item.sentiment);
-          // switch (item.sentiment.label) {
-          //   case "positive":
-          //     color = "green";
-          //     break;
-          //   case "negative":
-          //     color = "red";
-          //     break;
-          //   default:
-          //     color = "yellow";
-          // }
+          if (sentiment) {
+            color = sentimentColor(item.sentiment);
+          } else {
+            color = "yellow";
+          }
           h.mark(item.text, {
             separateWordSearch: false,
           });
